@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.npe.lucene.mapper.LuceneMapper">
+
+
+<!-- 	<insert id="insertVO" parameterType="org.npe.lucene.vo.LucVO" useGeneratedKeys="true">
+	
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE" >
+            SELECT seq_mno.nextVal from dual
+    	</selectKey>
+		<![CDATA[
+			insert into tbl_keyword(mno, username, keyword)
+			values(#{mno}, #{username}, #{keyword});
+		]]>	
+		
+	</insert> -->
+
+	<update id="setScore">
+	
+<!--  		<![CDATA[
+			update tbl_keyword k /*+INDEX_DESC (tbl_keyword pk_keyword)*/
+			set k.score = (select /*+INDEX_DESC (tbl_score pk_score)*/ 
+	                      	s.score
+	                  	   from 
+	                       	tbl_score s
+	                  	   where k.keyword = s.keyword and s.sno > 0)
+			where k.score is null and k.mno > 0
+		]]> --> 
+		
+		<![CDATA[
+			update npe_project.tbl_keyword k INNER JOIN npe_project.tbl_score s
+			ON k.keyword = s.keyword
+			set k.score = s.score
+			where k.score IS NULL
+		]]>
+	
+	</update>
+
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="org.npe.lucene.service"/>
+	
+	<!-- mybatis-spring -->	
+	<mybatis-spring:scan base-package="org.npe.lucene.mapper"/>
+	
+	<bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!--	  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+ 	  <property name="url" value="jdbc:oracle:thin:@61.72.16.181:5024:orcl" />
+	  <property name="username" value="jun_book" />
+	  <property name="password" value="jun" /> -->
+	  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	  <property name="url" value="jdbc:mysql://61.72.16.181:5026/npe_project" />
+	  <property name="username" value="jinyoung" />
+	  <property name="password" value="jinyoung" />	  
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  	  <property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  	  <property name="dataSource" ref="dataSource" />  
+    </bean>
+    
+    <!-- spring transaction -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    	<tx:attributes>
+    		<tx:method name="get*" read-only="true" rollback-for="Exception"/>
+    		<tx:method name="*" />
+    	</tx:attributes>
+	</tx:advice>
+	<aop:config> <!-- Advisor(Advice+pointcut) -->
+		<aop:pointcut expression="execution(* org.npe.lucene.service.*.*(..))" id="txPointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>	
+	</aop:config>
+		
+</beans>
