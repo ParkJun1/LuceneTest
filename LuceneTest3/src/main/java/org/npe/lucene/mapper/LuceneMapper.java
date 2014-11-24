@@ -29,5 +29,12 @@ public interface LuceneMapper {
 			+ "where username = #{username} and regdate > date_sub(now(), interval 7 day) " 
 			+ "group by username")
 	public Integer getScore(String username);
+	
+	@Select("select msg "
+			+ "from tbl_msg "
+			+ "where #{score} > startno and #{score} < endno "
+			+ "ORDER BY RAND() "
+			+ "LIMIT 1")
+	public String getMsg(Integer score);
 
 }

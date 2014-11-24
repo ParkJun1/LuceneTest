@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]> --> 
 		
 		<![CDATA[
-			update npe_project.tbl_keyword k INNER JOIN npe_project.tbl_score s
+			update tbl_keyword k INNER JOIN tbl_score s
 			ON k.keyword = s.keyword
 			set k.score = s.score
 			where k.score IS NULL

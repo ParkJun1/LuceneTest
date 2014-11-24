@@ -33,8 +33,7 @@ public class LuceneService {
 		
 		System.out.println("점수 : " + score);
 		
-		
-		return "해당메시지~~";
+		return mapper.getMsg(score);
 	}
 	
 }
