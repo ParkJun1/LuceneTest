@@ -48,5 +48,42 @@
 		<aop:pointcut expression="execution(* org.npe.lucene.service.*.*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>	
 	</aop:config>
+	
+	<!-- Quarts설정.................. -->
+	<!-- 1. Cron 대상이 되는 클래스 정의 -->
+	<bean id="cronQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="org.npe.lucene.bat.CronQuartz2"/>
+	<!-- 	<property name="jobDataAsMap">
+	    	<map>
+	        	<entry key="batchService">
+	            	<ref local="batchService"/>
+	            </entry>
+	        </map>
+	    </property> -->
+	</bean>
+ 
+	<!-- 2. Cron 시간 설정 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail" ref="cronQuartz"/>
+	    <property name="cronExpression" value="0/5 * * * * ?"/>
+	</bean>
+	
+	<!-- 3. Cron 실행 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	            <ref bean="cronTrigger"/>
+	        </list>
+	    </property>
+	    <property name="quartzProperties">
+	        <props>
+	            <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+	            <prop key="org.quartz.threadPool.threadCount">3</prop>
+	            <prop key="org.quartz.threadPool.threadPriority">4</prop>
+	            <prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+	            <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+	        </props>
+	    </property>
+	</bean>
 		
 </beans>
