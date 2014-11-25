@@ -19,7 +19,7 @@
 	<!-- 2. Cron 시간 설정 -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 	    <property name="jobDetail" ref="cronQuartz"/>
-	    <property name="cronExpression" value="0/5 * * * * ?"/>
+	    <property name="cronExpression" value="0/10 * * * * ?"/>
 	</bean>
 	
 	<!-- 3. Cron 실행 -->

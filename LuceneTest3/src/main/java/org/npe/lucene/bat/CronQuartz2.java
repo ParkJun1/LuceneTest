@@ -22,7 +22,8 @@ public class CronQuartz2 extends QuartzJobBean {
 	@Override
 	protected void executeInternal(JobExecutionContext jobContext) throws JobExecutionException {
         try {
-        	System.out.println("5초 주기로 동작 :" + dao.getVO("user03"));
+        	dao.cleanNull();
+        	System.out.println("5초 주기로 null값 삭제 ");
         } catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -44,7 +44,8 @@ public class BatchDAO {
 	enum SQL {
 		
 		SELECT("select now()"),
-		SELECT2("select * from tbl_keyword where username = ?");
+		SELECT2("select * from tbl_keyword where username = ?"),
+		CLEAN("DELETE FROM tbl_keyword WHERE score IS NULL");
 		
 		String value;
 		
@@ -75,6 +76,7 @@ public class BatchDAO {
 		return time;
 	}
 	
+	//Quartz를 이용한 mysql통신 테스트....................
 	public LucVO getVO(final String username) throws Exception {
 		
 		final LucVO vo = new LucVO();
@@ -100,6 +102,25 @@ public class BatchDAO {
 			
 		}.doExcute();
 		return vo;
+	}
+	
+	//Quartz를 이용한 tbl_keyword테이블의 null칼럼 삭제........................
+	public void cleanNull() throws Exception {
+		new SqlAgent() {
+
+			@Override
+			protected void doJob() throws Exception {
+				// TODO Auto-generated method stub
+				pstmt = con.prepareStatement(SQL.CLEAN.value);
+				
+				int resultCount = pstmt.executeUpdate();
+				if(resultCount < 1) {
+					throw new Exception("CLEAN ERROR");
+				}
+				
+			}
+			
+		}.doExcute();
 	}
 	
 	

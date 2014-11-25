@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.lucene.analysis.ko.KoreanAnalyzer;
+import org.apache.lucene.analysis.ko.morph.WordSegmentAnalyzer;
 import org.npe.lucene.service.LuceneService;
 import org.npe.lucene.util.AnalyzerUtils;
 import org.npe.lucene.vo.LucVO;
@@ -25,7 +26,8 @@ public class LuceneController {
 	
 	private static Logger logger = LoggerFactory.getLogger(LuceneController.class);
 	
-	private static final KoreanAnalyzer analyzer = new KoreanAnalyzer();
+	private static final KoreanAnalyzer koAnalyzer = new KoreanAnalyzer();
+	private static final WordSegmentAnalyzer wsAnalyer = new WordSegmentAnalyzer();
 	
 	@RequestMapping("/doA")
 	public void doA() {
@@ -41,7 +43,7 @@ public class LuceneController {
 	@RequestMapping(value="/input", method=RequestMethod.POST)
 	public String input(LucVO vo, String massage) throws Exception {
 		
-		vo.setWordList(AnalyzerUtils.displayTokens(analyzer, massage));
+		vo.setWordList(AnalyzerUtils.displayTokens(koAnalyzer, massage));
 		
 		System.out.println("LuceneController input....." + vo);
 		
