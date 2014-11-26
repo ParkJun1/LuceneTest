@@ -1,5 +1,6 @@
 package org.npe.lucene.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -36,5 +37,8 @@ public interface LuceneMapper {
 			+ "ORDER BY RAND() "
 			+ "LIMIT 1")
 	public String getMsg(Integer score);
+	
+	@Delete("DELETE FROM tbl_keyword WHERE username = #{username} and score IS NULL")
+	public void deleteNull(String username);
 
 }

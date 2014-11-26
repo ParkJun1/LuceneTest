@@ -25,6 +25,7 @@ public class LuceneService {
 		}
 		
 		mapper.setScore();
+		mapper.deleteNull(vo.getUsername());
 	}
 	
 	public String getMassage(String username) throws Exception {

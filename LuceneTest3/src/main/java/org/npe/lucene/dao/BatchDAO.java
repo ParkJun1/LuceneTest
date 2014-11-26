@@ -114,6 +114,7 @@ public class BatchDAO {
 				pstmt = con.prepareStatement(SQL.CLEAN.value);
 				
 				int resultCount = pstmt.executeUpdate();
+				System.out.println("DAO : " + resultCount);
 				if(resultCount < 1) {
 					throw new Exception("CLEAN ERROR");
 				}

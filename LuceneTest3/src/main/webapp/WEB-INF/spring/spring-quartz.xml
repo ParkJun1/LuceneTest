@@ -3,24 +3,35 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<!-- <bean id="batchDAO" class="org.npe.lucene.dao.BatchDAO"/> -->
+	
 	<!-- Quarts설정.................. -->
 	<!-- 1. Cron 대상이 되는 클래스 정의 -->
 	<bean id="cronQuartz" class="org.springframework.scheduling.quartz.JobDetailBean">
 	    <property name="jobClass" value="org.npe.lucene.bat.CronQuartz2"/>
-	<!-- 	<property name="jobDataAsMap">
+<!-- 	 	<property name="jobDataAsMap">
 	    	<map>
-	        	<entry key="batchService">
-	            	<ref local="batchService"/>
+	        	<entry key="batchDAO">
+	            	<ref local="batchDAO"/>
 	            </entry>
 	        </map>
-	    </property> -->
+	    </property> --> 
 	</bean>
  
 	<!-- 2. Cron 시간 설정 -->
+	<!-- 방법1. 정확한 시간때를 설정 -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 	    <property name="jobDetail" ref="cronQuartz"/>
-	    <property name="cronExpression" value="0/10 * * * * ?"/>
+	    <property name="cronExpression" value="0/5 * * * * ?"/>
 	</bean>
+	
+	<!-- 방법2. 반복 횟수를 설정 -->
+<!-- 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+    	<property name="jobDetail" ref="cronQuartz"/>
+        <property name="startDelay" value="10000"/> 서버가 올라간후 시작될 시간
+        <property name="repeatInterval" value="5000"/> 간격 시간 설정 1000이면 1초
+        <property name="repeatCount" value="0"/> 반복횟수 0이면 한번만 수행된다         
+    </bean> -->
 	
 	<!-- 3. Cron 실행 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

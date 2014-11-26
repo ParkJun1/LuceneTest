@@ -1,5 +1,7 @@
 package org.npe.lucene.bat;
 
+import javax.inject.Inject;
+
 import org.npe.lucene.dao.BatchDAO;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -22,8 +24,7 @@ public class CronQuartz2 extends QuartzJobBean {
 	@Override
 	protected void executeInternal(JobExecutionContext jobContext) throws JobExecutionException {
         try {
-        	dao.cleanNull();
-        	System.out.println("5초 주기로 null값 삭제 ");
+        	System.out.println("5초 주기로 실행  : " + dao.getVO("user03"));
         } catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
