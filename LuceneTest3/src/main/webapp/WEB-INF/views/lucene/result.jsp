@@ -9,14 +9,19 @@
 </head>
 <body>
 	
-	<h1>단어 분석 완료</h1>	
+	<h1>메시지 분석 완료</h1>	
 	
 	<form id='resultForm'>
 		<li><label>아이디</label><input type='text' name='username'></li>
 	</form>
 	
 	<button id='resultBtn'>결과메시지</button>
-	
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
 	<div id='result'></div>
 	
 	<script>
@@ -30,7 +35,7 @@
 				url     : "/luc/result",
 				data    : $formData,
 				success : function(data) {
-					$resultDiv.html(data);
+					$resultDiv.html("<li><h2>" + data + "</h2></li>");
 				}
 			});		
 		});	

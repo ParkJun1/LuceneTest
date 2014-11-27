@@ -12,6 +12,8 @@
 </head>
 <body>
 	
+	<h1> 사용자 메시지 입력 </h1>
+	
 	<form id='msgForm'>
 		<li><label>아이디</label> <input type='text' name='username'></li>
 		<li><label>메시지</label> <input type='text' name='massage'></li>

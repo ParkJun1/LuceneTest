@@ -25,7 +25,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/dev/arirang-analyzer-4.6-spring.jar">
+	<classpathentry kind="lib" path="C:/Users/junpark/Desktop/lucene_4.6_spring_s.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

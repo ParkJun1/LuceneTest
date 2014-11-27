@@ -1,9 +1,12 @@
 package org.npe.lucene.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.npe.lucene.vo.DemoVO;
 import org.npe.lucene.vo.LucVO;
 
 public interface LuceneMapper {
@@ -40,5 +43,10 @@ public interface LuceneMapper {
 	
 	@Delete("DELETE FROM tbl_keyword WHERE username = #{username} and score IS NULL")
 	public void deleteNull(String username);
+	
+	@Select("select keyword, score "
+			+ "from tbl_keyword "
+			+ "where username = #{username}")
+	public ArrayList<DemoVO> demo1(String username);
 
 }

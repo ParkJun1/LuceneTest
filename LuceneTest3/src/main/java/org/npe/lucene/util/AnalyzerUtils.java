@@ -18,7 +18,7 @@ public class AnalyzerUtils {
 
 	public static List<String> displayTokens(Analyzer analyzer, String text) throws IOException {
 		
-		System.out.println(text);
+		//System.out.println(text);
 		
 		TokenStream stream = analyzer.tokenStream("s", new StringReader(text));
 		
@@ -30,7 +30,7 @@ public class AnalyzerUtils {
 		OffsetAttribute offset = stream.addAttribute(OffsetAttribute.class);
 		//System.out.println("4" + text);
 		TypeAttribute type = stream.addAttribute(TypeAttribute.class);
-		System.out.println("2" + text);
+		//System.out.println("2" + text);
 		//int position = 0;
 		
 		stream.reset();

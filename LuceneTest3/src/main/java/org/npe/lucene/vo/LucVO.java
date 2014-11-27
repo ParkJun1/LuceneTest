@@ -57,9 +57,7 @@ public class LucVO {
 	}
 	@Override
 	public String toString() {
-		return "LucVO [mno=" + mno + ", username=" + username + ", score="
-				+ score + ", regdate=" + regdate + ", keyword=" + keyword
-				+ ", wordList=" + wordList + "]";
+		return "LucVO [username=" + username + ", wordList=" + wordList + "]";
 	}
 	
 	
