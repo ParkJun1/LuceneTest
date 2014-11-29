@@ -53,12 +53,15 @@ public class LuceneController {
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.POST, produces="text/html;charset=UTF-8")
-	public @ResponseBody String result(String username) throws Exception {
+	public @ResponseBody String result(String username, Model model) throws Exception {
 		
 		System.out.println("LuceneController result....." + username);
 		
+		String massage = service.getMassage(username);
 		
-		return service.getMassage(username);
+		logger.info(massage);
+		
+		return massage;
 	}
 
 }

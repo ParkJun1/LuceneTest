@@ -1,11 +1,11 @@
 package org.npe.lucene.web;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,7 +26,7 @@ public class ControllerTest {
 	private WebApplicationContext wac;
 	
 	protected MockMvc mockMvc;
-	protected static Logger logger = LoggerFactory.getLogger("ControllerTest");
+	protected static Logger logger = Logger.getLogger(Controller.class);
 	
     @Before
     public void setup() {
