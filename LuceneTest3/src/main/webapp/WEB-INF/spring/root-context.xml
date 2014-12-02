@@ -49,6 +49,6 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>	
 	</aop:config>
 	
-	<import resource="spring-quartz.xml"/>
+	<!-- <import resource="spring-quartz.xml"/> -->
 		
 </beans>

@@ -23,6 +23,14 @@
 	
 	<context:component-scan base-package="org.npe.lucene.web" />
 	
+	<interceptors>
+        <interceptor>
+            <mapping path="/luc/*" />
+       		
+            <beans:bean class="org.npe.lucene.util.UserAuthInterceptor" />
+        </interceptor>
+	
+	</interceptors>
 	
 	
 </beans:beans>
